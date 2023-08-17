@@ -25,11 +25,15 @@ class MatriculaViewSet(viewsets.ModelViewSet):
     '''Listando todas as matriculas'''
     queryset = Matricula.objects.all()
     serializer_class = MatriculaSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class CursoDisciplinaViewSet(viewsets.ModelViewSet):
    '''Listando todos os cursos-disciplinas'''
    queryset = CursoDisciplina.objects.all()
    serializer_class = CursoDisciplinaSerializer
+   authentication_classes = [BasicAuthentication]
+   permission_classes = [IsAuthenticated]
 
 class ListaMatriculasAluno(generics.ListAPIView):
     """Listando matrículas de um aluno(a)"""
@@ -37,6 +41,8 @@ class ListaMatriculasAluno(generics.ListAPIView):
         queryset = Matricula.objects.filter(aluno_id=self.kwargs['pk'])
         return queryset
     serializer_class = ListaMatriculaAlunoSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class ListaAlunosMatriculados(generics.ListAPIView):
     """Listando alunos(as) matriculados em um Curso"""
@@ -44,16 +50,22 @@ class ListaAlunosMatriculados(generics.ListAPIView):
         queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
         return queryset
     serializer_class = ListaAlunosMatriculadosSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class ListaDisciplinasCurso(generics.ListAPIView):
     """Listando Disciplinas de um curso"""
     def get_queryset(self):
         return CursoDisciplina.objects.filter(curso_id=self.kwargs['pk'])
     serializer_class = ListaDisciplinasCursoSerialiizer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class DisciplinasViewSet(viewsets.ModelViewSet):
     """Lista de Disciplinas"""
     queryset = Disciplina.objects.all()
     serializer_class = DisciplinaSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
